@@ -1,0 +1,166 @@
+/*
+  Copyright 2019 www.dev5.cn, Inc. dev5@qq.com
+ 
+  This file is part of X-MSG-IM.
+ 
+  X-MSG-IM is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  X-MSG-IM is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU Affero General Public License
+  along with X-MSG-IM.  If not, see <https://www.gnu.org/licenses/>.
+ */
+syntax = "proto3";
+
+import "net-x-msg-im-auth.proto";
+
+option java_package = "x.msg.pb";
+option java_outer_classname = "XmsgImAuthSysPb";
+message XmsgImAuthClientAttachSimpleReq
+{
+    string token = 1; 
+    string salt = 2; 
+    string sign = 3; 
+    string alg = 4; 
+    string cgt = 5; 
+    map<string, string> ext = 6; 
+}
+
+message XmsgImAuthClientAttachSimpleRsp
+{
+    string usr = 1; 
+    string secret = 2; 
+    uint64 gts = 3; 
+    uint64 expired = 4; 
+    XmsgImClientDeviceInfo info = 5; 
+    map<string, string> ext = 6; 
+}
+message XmsgImAuthUsrAuthInfoQueryReq
+{
+    string token = 1; 
+    string cgt = 2; 
+}
+
+message XmsgImAuthUsrAuthInfoQueryRsp
+{
+    string secret = 1; 
+    uint64 gts = 2; 
+    uint64 expired = 3; 
+    XmsgImClientDeviceInfo info = 4; 
+    map<string, string> ext = 5; 
+}
+message XmsgImAuthOrgRegisteReq
+{
+    bool enable = 1; 
+    map<string, string> info = 2; 
+}
+
+message XmsgImAuthOrgRegisteRsp
+{
+    string cgt = 1; 
+}
+message XmsgImHlrUsrInitReq
+{
+    string cgt = 1; 
+    map<string, string> ext = 2; 
+}
+
+message XmsgImHlrUsrInitRsp
+{
+    map<string, string> ext = 1; 
+}
+message XmsgImHlrUsrAuthInfoQueryReq
+{
+    string token = 1; 
+    string cgt = 2; 
+}
+
+message XmsgImHlrUsrAuthInfoQueryRsp
+{
+    string secret = 1; 
+    uint64 gts = 2; 
+    uint64 expired = 3; 
+    XmsgImClientDeviceInfo info = 4; 
+    map<string, string> ext = 5; 
+}
+message XmsgImHlrChannelStatusSubReq
+{
+    map<string, string> ext = 1; 
+}
+
+message XmsgImHlrChannelStatusSubRsp
+{
+    map<string, string> ext = 1; 
+}
+
+message XmsgImHlrChannelStatusPubReq
+{
+    repeated XmsgImHlrChannelStatusChangedNotice notice = 1; 
+    bool more = 2; 
+}
+
+message XmsgImHlrChannelStatusPubRsp
+{
+    map<string, string> ext = 1; 
+}
+message XmsgImHlrChannelStatusChangedNotice
+{
+    string cgt = 1; 
+    string plat = 2; 
+    string did = 3; 
+    string status = 4; 
+}
+message XmsgApClientKickReq
+{
+    string ccid = 1; 
+}
+
+message XmsgApClientKickRsp
+{
+    map<string, string> ext = 1; 
+}
+message XmsgApClientLostNotice
+{
+    string apCgt = 1; 
+    string cgt = 2; 
+    string plat = 3; 
+    string did = 4; 
+    string ccid = 5; 
+}
+message XmsgApClientEstbNotice
+{
+    string apCgt = 1; 
+    string cgt = 2; 
+    string plat = 3; 
+    string did = 4; 
+    string ccid = 5; 
+}
+message XmsgImAuthOrgUpdateAccountInfoReq
+{
+    string cgt = 1; 
+    map<string, string> upsert = 2; 
+    repeated string remove = 3; 
+}
+
+message XmsgImAuthOrgUpdateAccountInfoRsp
+{
+    map<string, string> ext = 1; 
+}
+message XmsgImMgrHlrSendSysNoticeReq
+{
+    string msg = 1; 
+    bytes dat = 2; 
+    uint64 expired = 3; 
+    map<string, string> ext = 4; 
+}
+
+message XmsgImMgrHlrSendSysNoticeRsp
+{
+    map<string, string> ext = 4; 
+}

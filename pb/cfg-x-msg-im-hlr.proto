@@ -1,0 +1,110 @@
+/*
+  Copyright 2019 www.dev5.cn, Inc. dev5@qq.com
+ 
+  This file is part of X-MSG-IM.
+ 
+  X-MSG-IM is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  X-MSG-IM is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU Affero General Public License
+  along with X-MSG-IM.  If not, see <https://www.gnu.org/licenses/>.
+ */
+syntax = "proto3";
+
+message XmsgImHlrCfgPb
+{
+    string cgt = 1; 
+    string cfgType = 2; 
+    XmsgImHlrCfgMongodb mongodb = 3; 
+    XmsgImHlrCfgMysql mysql = 4; 
+    XmsgImHlrCfgLog log = 5; 
+    XmsgImHlrCfgXscTcpServer xscTcpCfg = 6; 
+    repeated XmsgImHlrCfgXmsgNeH2nAddr h2n = 7; 
+    repeated XmsgImHlrCfgXmsgNeN2hAddr n2h = 8; 
+    XmsgImHlrCfgMisc misc = 9; 
+    XmsgImHlrCfgContracts contracts = 13; 
+    uint64 gts = 10; 
+    uint64 uts = 11; 
+}
+
+message XmsgImHlrCfgMongodb
+{
+    string uri = 1; 
+}
+
+message XmsgImHlrCfgMysql
+{
+    string host = 1;
+    uint32 port = 2;
+    string db = 3;
+    string usr = 4;
+    string password = 5;
+    uint32 poolSize = 6;
+}
+
+message XmsgImHlrCfgLog
+{
+    string level = 1; 
+    string output = 2; 
+}
+
+message XmsgImHlrCfgXscTcpServer
+{
+    string addr = 1; 
+    uint32 worker = 2; 
+    uint32 peerLimit = 3; 
+    uint32 peerMtu = 4; 
+    uint32 peerRcvBuf = 5; 
+    uint32 peerSndBuf = 6; 
+    uint32 lazyClose = 7; 
+    bool tracing = 8; 
+    uint32 heartbeat = 9; 
+    uint32 n2hZombie = 10; 
+    uint32 n2hTransTimeout = 11; 
+    bool n2hTracing = 12; 
+    uint32 h2nReConn = 13; 
+    uint32 h2nTransTimeout = 14; 
+}
+
+message XmsgImHlrCfgXmsgNeH2nAddr
+{
+    string neg = 1; 
+    string cgt = 2; 
+    string addr = 3; 
+    string pwd = 4; 
+    string alg = 5; 
+    uint32 redundant = 6; 
+}
+
+message XmsgImHlrCfgXmsgNeN2hAddr
+{
+    string neg = 1; 
+    string cgt = 2; 
+    string pwd = 3; 
+    string addr = 4; 
+}
+
+message XmsgImHlrCfgContracts
+{
+    bool enable = 1; 
+    uint32 usrEventExpired = 2; 
+}
+
+message XmsgImHlrCfgMisc
+{
+    XmsgImHlrPlatCompeteMode platCompeteMode = 1; 
+}
+
+enum XmsgImHlrPlatCompeteMode {
+    X_MSG_IM_HLR_PLAT_COMPETE_MODE_TYPE_ONLY = 0x00; 
+    X_MSG_IM_HLR_PLAT_COMPETE_MODE_PLAT_ONLY = 0x01; 
+    X_MSG_IM_HLR_PLAT_COMPETE_MODE_TERMINAL_ONLY = 0x02; 
+    X_MSG_IM_HLR_PLAT_COMPETE_MODE_AUTH = 0x03; 
+}
